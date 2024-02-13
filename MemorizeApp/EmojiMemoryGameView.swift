@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct EmojiMemoryGameView: View {
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -20,5 +20,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    EmojiMemoryGameView()
 }
