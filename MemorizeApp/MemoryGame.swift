@@ -115,6 +115,48 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     }
 }
 
+struct Theme {
+    let name: String
+    let emojis: [String]
+    let numberOfPairsOfCards: Int
+    let color: String
+    
+    private let themes: [String: [String]] = [
+        "Nature": ["🌿", "🌻", "🌺", "🌳", "🌼", "🌸", "🍃", "🌷", "🌹", "🍀", "🌱", "🏵️", "💐", "🥀", "🌾", "🌷"], // Nature Theme
+        "Food": ["🍔", "🍕", "🍟", "🥗", "🍦", "🍩", "🍪", "🍫", "🥤", "🍹", "🍭", "🍬", "🥪", "🍔", "🍟"], // Food Theme
+        "Weather": ["🌞", "🌧️", "❄️", "⛈️", "🌈", "🌤️", "🌪️", "🌊", "🌫️", "🌨️", "🌦️", "🌥️", "🌬️", "🌪️", "🌩️"], // Weather Theme
+        "Animal": ["🐶", "🐱", "🐰", "🐼", "🐵", "🐨", "🦁", "🐯", "🐮", "🐷", "🐸", "🐙", "🐢", "🐍", "🐳"], // Animal Theme
+        "Travel": ["✈️", "🚗", "🚢", "🚀", "🚲", "🚁", "🚂", "🏍️", "🚒", "🚎", "🛵", "🚆", "🛳️", "🚤"], // Travel Theme
+        "Celebration": ["🎉", "🎊", "🎈", "🎂", "🎁", "🎀", "🎇", "🎆", "🎄", "🎍", "🎏", "🎃", "🎐", "🎑"] // Celebration Theme
+    ]
+    
+    private let colors: [String: String] = [
+        "Nature": "Green",
+        "Food": "Orange",
+        "Weather": "Blue",
+        "Animal": "Gray",
+        "Travel": "Purple",
+        "Celebration": "Red"
+    ]
+    
+    init(name: String, numberOfPairsOfCards: Int) {
+        self.name = name
+        self.numberOfPairsOfCards = numberOfPairsOfCards
+        
+        if let emojis = themes[self.name] {
+            if numberOfPairsOfCards < emojis.count {
+                self.emojis = emojis.shuffled()
+            } else {
+                self.emojis = emojis
+            }
+        } else {
+            self.emojis = themes["Nature"]!
+        }
+        
+        self.color = colors[self.name] ?? "Green"
+    }
+}
+
 extension Array {
     var only: Element? {
         count == 1 ? first : nil
