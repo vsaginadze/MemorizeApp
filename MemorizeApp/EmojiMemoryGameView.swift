@@ -38,16 +38,6 @@ struct EmojiMemoryGameView: View {
         .padding()
     }
     
-    private var footer: some View {
-        HStack {
-            newGameButton
-            
-            Spacer()
-            
-            shuffleButton
-        }
-    }
-    
     private var header: some View {
         HStack {
             Text("\(viewModel.theme.name)")
@@ -61,6 +51,16 @@ struct EmojiMemoryGameView: View {
                 .font(.title2)
         }
         .padding(.horizontal)
+    }
+    
+    private var footer: some View {
+        HStack {
+            newGameButton
+            
+            Spacer()
+            
+            shuffleButton
+        }
     }
     
     private var cards: some View {
@@ -77,36 +77,32 @@ struct EmojiMemoryGameView: View {
     }
     
     private var newGameButton: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 12)
-                .frame(width: 170, height: 50)
-            
-            Button {
-                viewModel.startNewGame()
-            } label: {
-                Text("New Game")
-                Image(systemName: "return")
-            }
-            .font(.title2)
-            .foregroundStyle(.white)
+        Button {
+            viewModel.startNewGame()
+        } label: {
+            Text("New Game")
+            Image(systemName: "return")
+        }
+        .font(.title2)
+        .foregroundStyle(.white)
+        .padding()
+        .background {
+            RoundedRectangle(cornerRadius: 10)
         }
     }
     
     private var shuffleButton: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 12)
-                .frame(width: 125, height: 50)
-            
-            Button {
-                withAnimation {
-                    viewModel.shuffle()
-                }
-            } label: {
-                Text("Shuffle")
-                Image(systemName: "shuffle")
-            }
-            .font(.title2)
-            .foregroundStyle(.white)
+        Button {
+            viewModel.shuffle()
+        } label: {
+            Text("Shuffle")
+            Image(systemName: "shuffle")
+        }
+        .font(.title2)
+        .foregroundStyle(.white)
+        .padding()
+        .background {
+            RoundedRectangle(cornerRadius: 10)
         }
     }
     
